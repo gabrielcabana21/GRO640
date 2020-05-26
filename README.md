@@ -12,7 +12,7 @@ To install the package, use:
 pip install git+https://github.com/SherbyRobotics/pyro
 ```
 
-It will install the files from the project. It will also check and install the required dependencies. Warning: don't use this option if you are using an Anacondo distribution.
+It will install the files from the project. It will also check and install the required dependencies. Warning: don't use this option if you are using an Anaconda distribution (conflits with pip).
 
 ### Method 2: Clone repo and install ###
 
