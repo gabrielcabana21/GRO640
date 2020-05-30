@@ -7,6 +7,7 @@ Created on Fri May  1 19:51:49 2020
 """
 import numpy as np
 
+from gro640_robots import DrillingRobot
 from gro640_robots import DrillingRobotOnJig
 from abcd1234      import CustomDrillingController
 
@@ -15,7 +16,8 @@ from abcd1234      import CustomDrillingController
 sys = DrillingRobotOnJig()
 
 # Controller
-ctl = CustomDrillingController( ) # Empty do nothing controller template
+model = DrillingRobot()
+ctl   = CustomDrillingController( model ) # Empty do nothing controller template
 
 # Closed-loop dynamic
 clsys = ctl + sys
