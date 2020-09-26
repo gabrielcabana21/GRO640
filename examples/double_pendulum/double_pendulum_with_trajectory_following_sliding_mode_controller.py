@@ -26,7 +26,15 @@ cl_sys = ctl + sys
 
 # Simultation
 cl_sys.x0  = np.array([-3.14,0,0,0])
-cl_sys.compute_trajectory(10,10001,'euler')
+
+
+tf = 10
+n  = 100001
+solver = 'euler'
+cl_sys.compute_trajectory(tf)
+
+
+
 cl_sys.plot_trajectory('xu')
 cl_sys.plot_phase_plane_trajectory(0, 2)
 cl_sys.animate_simulation()
