@@ -374,8 +374,10 @@ class ValueIteration_ND:
         self.cf = cost_function
 
         # Print params
-        self.fontsize   = 10
-        self.plot_max_J = 1000
+        self.fontsize             = 5
+        self.figsize              = (4, 3)
+        self.dpi                  = 300
+        self.plot_max_J           = 10000
 
         # Options
         self.uselookuptable = True
@@ -581,7 +583,7 @@ class ValueIteration_ND:
             cur_threshold = self.compute_step()
             print('Current threshold', cur_threshold)
             if plot:
-                self.draw_cost2go(maxJ)
+                self.draw_cost2go( step, maxJ )
 
     ################################
     def plot_dynamic_cost2go(self):
@@ -589,12 +591,12 @@ class ValueIteration_ND:
         
         maxJ = self.plot_max_J
 
-        plt.ion()
+        #plt.ion()
 
         xname = self.sys.state_label[0] + ' ' + self.sys.state_units[0]
         yname = self.sys.state_label[1] + ' ' + self.sys.state_units[1]
 
-        self.fig_dynamic = plt.figure(figsize=(4, 4), dpi=300, frameon=True)
+        self.fig_dynamic = plt.figure(figsize= self.figsize, dpi=self.dpi, frameon=True)
         self.fig_dynamic.canvas.set_window_title('Dynamic Cost-to-go')
         self.ax1_dynamic = self.fig_dynamic.add_subplot(1, 1, 1)
 
@@ -608,27 +610,38 @@ class ValueIteration_ND:
 
         self.Jplot = self.J.copy()
         self.create_Jplot()
+        #TODO update next line
         plot = self.Jplot.T if self.n_dim == 2 else self.Jplot[..., 0].T
         self.im1_dynamic = plt.pcolormesh(self.grid_sys.xd[0],
                                   self.grid_sys.xd[1],
                                   plot,
                                   shading='gouraud')
+        
+        self.step_text_template = 'Number of steps = %i'
+        self.time_text = self.ax1_dynamic.text(
+                0.05, 0.05, '', transform=self.ax1_dynamic.transAxes, 
+                fontsize=self.fontsize )
+        
+        self.ax1_dynamic.tick_params( labelsize = self.fontsize )
 
         plt.colorbar()
         plt.grid(True)
         plt.tight_layout()
 
-        plt.draw()
-        plt.pause(0.1)
+        #plt.draw()
+        plt.pause(0.001)
+        
+        plt.ion()
 
     #############################
-    def draw_cost2go(self, maxJ=1000):
+    def draw_cost2go(self, step, maxJ=1000):
         self.Jplot = self.J.copy()
         self.create_Jplot()
         plot = self.Jplot.T if self.n_dim == 2 else self.Jplot.T[0]
         self.im1_dynamic.set_array(np.ravel(plot))
-        plt.draw()
-        plt.pause(0.1)
+        self.time_text.set_text(self.step_text_template % ( step ))
+        #plt.draw()
+        plt.pause(0.001)
 
     ################################
     def create_Jplot(self):
