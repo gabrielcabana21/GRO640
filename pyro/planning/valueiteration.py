@@ -633,6 +633,7 @@ class ValueIteration_ND:
         
         plt.ion()
 
+
     #############################
     def draw_cost2go(self, step, maxJ=1000):
         self.Jplot = self.J.copy()
@@ -642,6 +643,7 @@ class ValueIteration_ND:
         self.time_text.set_text(self.step_text_template % ( step ))
         #plt.draw()
         plt.pause(0.001)
+        
 
     ################################
     def create_Jplot(self):
@@ -666,7 +668,8 @@ class ValueIteration_ND:
         self.plot_max_J = maxJ
 
         self.plot_dynamic_cost2go()
-        self.draw_cost2go()
+        #self.draw_cost2go()
+
 
     ################################
     def plot_policy(self, i=0):
