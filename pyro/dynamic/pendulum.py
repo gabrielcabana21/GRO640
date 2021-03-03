@@ -611,7 +611,6 @@ if __name__ == "__main__":
     
     #sys = TwoIndependentSinglePendulum()
     
-    
     sys.x0 = np.array([0.1,0.9,0,0])
     tf = 20
     sys.compute_trajectory( tf )
