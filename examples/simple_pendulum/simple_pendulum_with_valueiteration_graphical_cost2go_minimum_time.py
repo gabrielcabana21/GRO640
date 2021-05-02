@@ -30,6 +30,7 @@ grid_sys = discretizer.GridDynamicSystem( sys )
 xbar = np.array([-3.14,0])
 tcf = costfunction.TimeCostFunction( xbar )
 tcf.EPS = 0.1
+#tcf.INF = 0
 
 sys.cost_function = tcf
 
@@ -39,7 +40,7 @@ vi = valueiteration.ValueIteration_ND( grid_sys , tcf )
 vi.initialize()
 vi.plot_max_J = 10
 #vi.load_data('simple_pendulum_vi_minimum_time')
-vi.compute_steps(300,True)
+vi.compute_steps(100,True)
 vi.assign_interpol_controller()
 vi.plot_policy(0)
 vi.plot_cost2go(10)

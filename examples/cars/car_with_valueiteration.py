@@ -44,9 +44,9 @@ vi = valueiteration.ValueIteration_ND( grid_sys , cf )
 vi.uselookuptable = True
 vi.initialize()
 
-vi.load_data('car_vi2')
-vi.compute_steps(20,False)
-vi.save_data('car_vi2')
+#vi.load_data('car_vi2')
+vi.compute_steps(2,True)
+#vi.save_data('car_vi2')
 
 ###############################################################################
 
