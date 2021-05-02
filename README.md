@@ -1,20 +1,20 @@
 # Python Robotics
 
-A object-based toolbox for robot dynamic simulation, analysis, control and planning.
+A object-based toolbox for robot dynamic simulation, analysis, control and planning. 
 
-# Installation #
+## Installation ##
 
-## Dependencies ###
+### Dependencies ####
 * numpy
 * scipy
 * matplotlib
 
-## Recommanded environment ##
+### Recommended environment ###
 Anaconda distribution + spyder IDE available here: https://www.anaconda.com/products/individual
 
 Note: If graphical animations are note working, try changing the graphics backend. In spyder this option is found in the menu at python/Preferences/IPython console/Backend. Inline does not allow animations, it is best to use Automatic of OS X (for Mac).
 
-### Method 1: Clone repo and add to python path ###
+### Clone repo and add to python path ###
 
 A simple option for development is simply to clone the repo:
 ```bash
@@ -22,38 +22,23 @@ git clone https://github.com/SherbyRobotics/pyro.git
 ```
 then add the pyro folder to the pythonpath variable of your environment. In spyder this option is found in the menu at python/PYTHONPATH manager.
 
-### Method 2: Clone repo and install ###
+## Librarie Architecture ##
 
-Clone the pyro repo from git, and install the pyro library to your python
-environment:
+### Dynamic objects ###
 
-```bash
+At the core of pyro is a mother-class representing generic non-linear dynamic systems, with the following nomemclature:
 
-git clone https://github.com/SherbyRobotics/pyro.git
-cd pyro
-python setup.py install
-```
-or to install in develop mode (having the `pyro` module automatically updated as you edit the code in this
-repository) use:
+<img width="929" alt="Screen Shot 2021-05-02 at 15 57 47" src="https://user-images.githubusercontent.com/16725496/116826021-fd9b7a80-ab5f-11eb-8e50-d7361094cbee.png">
 
-```bash
+## Controller objects ###
 
-git clone https://github.com/SherbyRobotics/pyro.git
-cd pyro
-python setup.py develop
-```
+Coming soon..
 
-### Method 3: Using PIP ###
+## How to use ##
 
-To install the package, use: 
-```bash
+Coming soon..
 
-pip install git+https://github.com/SherbyRobotics/pyro
-```
 
-It will install the files from the project. It will also check and install the required dependencies. Warning: don't use this option if you are using an Anaconda distribution (conflits with pip).
-
-# Usage #
 
 
 
