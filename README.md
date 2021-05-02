@@ -48,9 +48,11 @@ For "memoryless" controller, this operation is
 
 <img width="760" alt="Screen Shot 2021-05-02 at 16 17 34" src="https://user-images.githubusercontent.com/16725496/116826519-59ff9980-ab62-11eb-8256-6a9f4a3f4f0f.png">
 
+Available control algorithms: PID, LQR, Computed-Torque, End-point Impedance, Value-Iteration, Sliding-mode controller, etc.
+
 ### Trajectory planner objects ###
 
-
+Cooming soon..
 
 
 ## How to use ##
@@ -75,9 +77,6 @@ Coming soon..
 <img width="889" alt="Screen Shot 2021-05-02 at 16 38 59" src="https://user-images.githubusercontent.com/16725496/116827009-ef9c2880-ab64-11eb-8d81-12a2d6453eac.png">
 
 <img width="1167" alt="Screen Shot 2021-05-02 at 16 39 42" src="https://user-images.githubusercontent.com/16725496/116827025-0773ac80-ab65-11eb-8a1b-9b50086d86cb.png">
-
-<img width="881" alt="Screen Shot 2021-05-02 at 16 35 29" src="https://user-images.githubusercontent.com/16725496/116826928-8e745500-ab64-11eb-9a75-9375dfd1614b.png">
-
 
 ### Redondant Manipulator Controller ###
 
