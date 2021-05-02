@@ -38,7 +38,7 @@ Other more specific mother-class are
 <img width="763" alt="Screen Shot 2021-05-02 at 16 13 51" src="https://user-images.githubusercontent.com/16725496/116826418-dc3b8e00-ab61-11eb-9372-09ae08f0b15a.png">
 
 
-## Controller objects ###
+### Controller objects ###
 
 Controller objects can be used to closed the loop with an operation generating a closed-loop dynamic system:
 
@@ -48,6 +48,10 @@ For "memoryless" controller, this operation is
 
 <img width="760" alt="Screen Shot 2021-05-02 at 16 17 34" src="https://user-images.githubusercontent.com/16725496/116826519-59ff9980-ab62-11eb-8256-6a9f4a3f4f0f.png">
 
+### Trajectory planner objects ###
+
+
+
 
 ## How to use ##
 
@@ -55,6 +59,22 @@ See exemples scripts in pyro/examples.
 
 Coming soon..
 
+## Gallery ##
+
+### Double-pendulum Swing-up solved with Computed-Torque, RRT, Value-Iteration, etc.. ###
+
+<img width="1154" alt="Screen Shot 2021-05-02 at 16 26 47" src="https://user-images.githubusercontent.com/16725496/116826831-0ee68600-ab64-11eb-8c2f-ef38900d140e.png">
+
+<img width="1148" alt="Screen Shot 2021-05-02 at 16 32 13" src="https://user-images.githubusercontent.com/16725496/116826821-ff673d00-ab63-11eb-969c-72c0d0711076.png">
+
+
+
+### Car parallel parking solved with RRT, Value-Iteration, etc.. ###
+
+
+### Redondant Manipulator Controller ###
+
+<img width="1154" alt="Screen Shot 2021-05-02 at 16 26 47" src="https://user-images.githubusercontent.com/16725496/116826685-46a0fe00-ab63-11eb-9f9f-f269aa0e63b5.png">
 
 
 
