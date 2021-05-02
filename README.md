@@ -4,26 +4,22 @@ A toolbox for robot dynamic simulation, analysis, control and planning.
 
 ## Installation ##
 
-### Method 1: Using PIP ###
-
-To install the package, use: 
-```bash
-
-pip install git+https://github.com/SherbyRobotics/pyro
-```
-
-It will install the files from the project. It will also check and install the required dependencies.
-
-### Method 2: Clone repo and install ###
-
-The following dependencies must be installed.
-
-Required libraries:
+The following dependencies must be installed:
 
 * numpy
 * scipy
 * matplotlib
-* pytest (only to run tests)
+
+### Method 1: Clone repo and add to python path ###
+
+A simple option for development is simply to clone the repo:
+```bash
+git clone https://github.com/SherbyRobotics/pyro.git
+```
+then add the pyro folder to the pythonpath variable of your environment.
+
+
+### Method 2: Clone repo and install ###
 
 Clone the pyro repo from git, and install the pyro library to your python
 environment:
@@ -34,14 +30,28 @@ git clone https://github.com/SherbyRobotics/pyro.git
 cd pyro
 python setup.py install
 ```
+or to install in develop mode (having the `pyro` module automatically updated as you edit the code in this
+repository) use:
 
-## Development ##
+```bash
 
-Use `python setup.py develop` to install in develop mode, which will
-create a link (.egg-link file) to this code. The `pyro` module
-will therefore be automatically updated as you edit the code in this
-repository.
+git clone https://github.com/SherbyRobotics/pyro.git
+cd pyro
+python setup.py develop
+```
 
-Run tests: `pytest -ra ./tests` (from repository root)
+### Method 3: Using PIP ###
 
-Run all examples: `pytest -ra ./examples` (from repository root)
+To install the package, use: 
+```bash
+
+pip install git+https://github.com/SherbyRobotics/pyro
+```
+
+It will install the files from the project. It will also check and install the required dependencies. Warning: don't use this option if you are using an Anaconda distribution (conflits with pip).
+
+
+
+
+
+

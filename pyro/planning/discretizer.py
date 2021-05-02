@@ -134,6 +134,30 @@ class GridDynamicSystem:
         
                         # Increment node number
                         node = node + 1
+                        
+                        
+                        
+        elif self.sys.n == 4:
+            
+            # NOT yet validated!!!
+            
+            for i in range(self.xgriddim[0]):
+                for j in range(self.xgriddim[1]):
+                    for k in range(self.xgriddim[2]):
+                        for l in range(self.xgriddim[3]):
+                    
+                            # State
+                            x = np.array([ self.xd[0][i]  ,  self.xd[1][j]  , self.xd[2][k] , self.xd[3][l]])
+                            
+                            # State and grid index based on node #
+                            self.nodes_state[node,:] = x
+                            self.nodes_index[node,:] = np.array([i,j,k,l])
+                            
+                            # Node # based on index ijkl
+                            self.x_grid2node[i,j,k,l]    = node
+            
+                            # Increment node number
+                            node = node + 1
                     
         else:
             

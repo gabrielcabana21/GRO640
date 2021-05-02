@@ -37,7 +37,7 @@ vi.load_data('simple_pendulum_vi')
 # vi.compute_steps(100)
 vi.assign_interpol_controller()
 vi.plot_policy(0)
-vi.plot_cost2go()
+vi.plot_cost2go(5000)
 #vi.save_data('simple_pendulum_vi')
 
 ##############################################################################
@@ -51,5 +51,5 @@ cl_sys = controller.ClosedLoopSystem( sys , vi.ctl )
 # Simulation and animation
 
 cl_sys.x0   = np.array([0 ,0])
-cl_sys.plot_trajectory('xuj')
+cl_sys.plot_trajectory('xu')
 cl_sys.animate_simulation()

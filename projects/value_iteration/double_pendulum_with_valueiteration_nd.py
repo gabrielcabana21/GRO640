@@ -21,39 +21,43 @@ import matplotlib.pyplot as plt
 
 from pyro.planning import discretizer, valueiteration
 
+# Continuous dynamic system
 sys = pendulum.DoublePendulum()
 
+sys.x_ub = np.array([0.2,0.2,0.2,0.2])
+sys.x_lb = np.array([-0.2,-0.2,-0.2,-0.2])
+
+sys.u_ub = np.array([5,2])
+sys.u_lb = np.array([-5,-2])
+
 # Discrete world
-grid_sys = discretizer.GridDynamicSystem( sys )
+grid_sys = discretizer.GridDynamicSystem( sys , ( 11, 11, 11, 11) , (3,3) , 0.05)
 
 # Cost Function
-qcf = costfunction.QuadraticCostFunction(
-    np.ones(sys.n),
-    np.ones(sys.m),
-    np.ones(sys.p)
-)
+qcf = sys.cost_function
 
-qcf.xbar = np.array([ -3.14 , 0 ]) # target
-qcf.INF  = 10000
+qcf.xbar = np.array([ 0,0,0,0 ]) # target
+qcf.INF  = 100
 
 # VI algo
 vi = valueiteration.ValueIteration_ND( grid_sys , qcf )
 
 vi.initialize()
-# vi.load_data('simple_pendulum_vi')
-vi.compute_steps()
+#vi.load_data('bbb')
+vi.compute_steps(2,True)
 #vi.load_data()
 vi.assign_interpol_controller()
 vi.plot_policy(0)
 vi.plot_cost2go()
-vi.save_data('double_pendulum_vi')
+vi.save_data('bbb')
+
 
 #asign controller
 cl_sys = controller.ClosedLoopSystem( sys , vi.ctl )
 
 # Simulation and animation
-x0   = [0,0]
-tf   = 10
-sim = cl_sys.compute_trajectory(x0, tf, costfunc=qcf)
-cl_sys.get_plotter().plot(sim, 'xuj')
-cl_sys.get_animator().animate_simulation(sim)
+cl_sys.x0   = np.array([0.1,0.1,0,0])
+cl_sys.compute_trajectory(2,2001,'euler')
+cl_sys.plot_trajectory('xu')
+cl_sys.animate_simulation()
+

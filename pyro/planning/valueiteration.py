@@ -374,8 +374,10 @@ class ValueIteration_ND:
         self.cf = cost_function
 
         # Print params
-        self.fontsize   = 10
-        self.plot_max_J = 1000
+        self.fontsize             = 5
+        self.figsize              = (4, 3)
+        self.dpi                  = 300
+        self.plot_max_J           = 10000
 
         # Options
         self.uselookuptable = True
@@ -581,7 +583,7 @@ class ValueIteration_ND:
             cur_threshold = self.compute_step()
             print('Current threshold', cur_threshold)
             if plot:
-                self.draw_cost2go(maxJ)
+                self.draw_cost2go( step, maxJ )
 
     ################################
     def plot_dynamic_cost2go(self):
@@ -589,12 +591,12 @@ class ValueIteration_ND:
         
         maxJ = self.plot_max_J
 
-        plt.ion()
+        #plt.ion()
 
         xname = self.sys.state_label[0] + ' ' + self.sys.state_units[0]
         yname = self.sys.state_label[1] + ' ' + self.sys.state_units[1]
 
-        self.fig_dynamic = plt.figure(figsize=(4, 4), dpi=300, frameon=True)
+        self.fig_dynamic = plt.figure(figsize= self.figsize, dpi=self.dpi, frameon=True)
         self.fig_dynamic.canvas.set_window_title('Dynamic Cost-to-go')
         self.ax1_dynamic = self.fig_dynamic.add_subplot(1, 1, 1)
 
@@ -608,27 +610,68 @@ class ValueIteration_ND:
 
         self.Jplot = self.J.copy()
         self.create_Jplot()
-        plot = self.Jplot.T if self.n_dim == 2 else self.Jplot[..., 0].T
+        
+        
+        #TODO update next line for deciding axis to plot
+        #plot = self.Jplot.T if self.n_dim == 2 else self.Jplot[..., 0].T
+        
+        if self.n_dim == 2:
+            plot = self.Jplot.T
+            
+        elif self.n_dim == 3:
+            plot = self.Jplot[..., 0].T
+            
+        elif self.n_dim == 4:
+            plot = self.Jplot[...,0,0].T
+            
+        else:
+            raise NotImplementedError()
+            
+        
         self.im1_dynamic = plt.pcolormesh(self.grid_sys.xd[0],
                                   self.grid_sys.xd[1],
                                   plot,
                                   shading='gouraud')
+        
+        self.step_text_template = 'Number of steps = %i'
+        self.time_text = self.ax1_dynamic.text(
+                0.05, 0.05, '', transform=self.ax1_dynamic.transAxes, 
+                fontsize=self.fontsize )
+        
+        self.ax1_dynamic.tick_params( labelsize = self.fontsize )
 
         plt.colorbar()
         plt.grid(True)
         plt.tight_layout()
 
-        plt.draw()
-        plt.pause(0.1)
+        #plt.draw()
+        plt.pause(0.001)
+        
+        plt.ion()
+
 
     #############################
-    def draw_cost2go(self, maxJ=1000):
+    def draw_cost2go(self, step, maxJ=1000):
         self.Jplot = self.J.copy()
         self.create_Jplot()
-        plot = self.Jplot.T if self.n_dim == 2 else self.Jplot.T[0]
+        
+        if self.n_dim == 2:
+            plot = self.Jplot.T
+            
+        elif self.n_dim == 3:
+            plot = self.Jplot[..., 0].T
+            
+        elif self.n_dim == 4:
+            plot = self.Jplot[...,0,0].T
+            
+        else:
+            raise NotImplementedError()
+        
         self.im1_dynamic.set_array(np.ravel(plot))
-        plt.draw()
-        plt.pause(0.1)
+        self.time_text.set_text(self.step_text_template % ( step ))
+        #plt.draw()
+        plt.pause(0.001)
+        
 
     ################################
     def create_Jplot(self):
@@ -640,11 +683,20 @@ class ValueIteration_ND:
             for i in range(self.grid_sys.xgriddim[0]):
                 for j in range(self.grid_sys.xgriddim[1]):
                     self.Jplot[i, j] = maxJ if self.J[i, j] >= maxJ else self.J[i, j]
+                    
         elif self.n_dim == 3:
             for i in range(self.grid_sys.xgriddim[0]):
                 for j in range(self.grid_sys.xgriddim[1]):
                     for k in range(len(self.J[i, j])):
                         self.Jplot[i, j, k] = maxJ if self.J[i, j, k] >= maxJ else self.J[i, j, k]
+                        
+        elif self.n_dim == 4:
+            for i in range(self.grid_sys.xgriddim[0]):
+                for j in range(self.grid_sys.xgriddim[1]):
+                    for k in range(self.grid_sys.xgriddim[2]):
+                        for l in range(self.grid_sys.xgriddim[3]):
+                            self.Jplot[i, j, k, l] = maxJ if self.J[i, j, k, l] >= maxJ else self.J[i, j, k, l]
+        
 
     ################################
     def plot_cost2go(self, maxJ=1000):
@@ -653,7 +705,8 @@ class ValueIteration_ND:
         self.plot_max_J = maxJ
 
         self.plot_dynamic_cost2go()
-        self.draw_cost2go()
+        #self.draw_cost2go()
+
 
     ################################
     def plot_policy(self, i=0):
@@ -670,7 +723,20 @@ class ValueIteration_ND:
         self.fig1.canvas.set_window_title('Policy for u[%i]' % i)
         self.ax1 = self.fig1.add_subplot(1, 1, 1)
 
-        plot = policy_plot.T if self.n_dim == 2 else policy_plot[..., 0].T
+        #plot = policy_plot.T if self.n_dim == 2 else policy_plot[..., 0].T
+        
+        if self.n_dim == 2:
+            plot = policy_plot.T
+            
+        elif self.n_dim == 3:
+            plot = policy_plot[..., 0].T
+            
+        elif self.n_dim == 4:
+            plot = policy_plot[...,0,0].T
+            
+        else:
+            raise NotImplementedError()
+        
         plt.ylabel(yname, fontsize=self.fontsize)
         plt.xlabel(xname, fontsize=self.fontsize)
         self.im1 = plt.pcolormesh(self.grid_sys.xd[0],
