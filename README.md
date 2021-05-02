@@ -61,26 +61,33 @@ Coming soon..
 
 ## Gallery of exemples ##
 
+### Phase-plane Analysis ###
 
-### Pendulums Swing-up solved with Computed-Torque, RRT, Value-Iteration, etc.. ###
+<img width="887" alt="Screen Shot 2021-05-02 at 16 41 44" src="https://user-images.githubusercontent.com/16725496/116827083-59b4cd80-ab65-11eb-9be9-b02586a89d7f.png">
 
-<img width="1163" alt="Screen Shot 2021-05-02 at 16 34 04" src="https://user-images.githubusercontent.com/16725496/116826866-3c333400-ab64-11eb-9c99-e87742d273f7.png">
+### Optimal controller computation with Value-Iteration ###
 
-<img width="1148" alt="Screen Shot 2021-05-02 at 16 32 13" src="https://user-images.githubusercontent.com/16725496/116826821-ff673d00-ab63-11eb-969c-72c0d0711076.png">
+<img width="1131" alt="Screen Shot 2021-05-02 at 16 42 34" src="https://user-images.githubusercontent.com/16725496/116827109-6c2f0700-ab65-11eb-95e7-5290e4b50b32.png">
 
 
 ### Car parallel parking solved with RRT, Value-Iteration, etc.. ###
 
-<img width="1163" alt="Screen Shot 2021-05-02 at 16 34 04" src="https://user-images.githubusercontent.com/16725496/116826923-8ae0ce00-ab64-11eb-9fb8-a79b19b24a3d.png">
+<img width="889" alt="Screen Shot 2021-05-02 at 16 38 59" src="https://user-images.githubusercontent.com/16725496/116827009-ef9c2880-ab64-11eb-8d81-12a2d6453eac.png">
+
+<img width="1167" alt="Screen Shot 2021-05-02 at 16 39 42" src="https://user-images.githubusercontent.com/16725496/116827025-0773ac80-ab65-11eb-8a1b-9b50086d86cb.png">
 
 <img width="881" alt="Screen Shot 2021-05-02 at 16 35 29" src="https://user-images.githubusercontent.com/16725496/116826928-8e745500-ab64-11eb-9a75-9375dfd1614b.png">
-
 
 
 ### Redondant Manipulator Controller ###
 
 <img width="1154" alt="Screen Shot 2021-05-02 at 16 26 47" src="https://user-images.githubusercontent.com/16725496/116826685-46a0fe00-ab63-11eb-9f9f-f269aa0e63b5.png">
 
+### Pendulums Swing-up solved with Computed-Torque, RRT, Value-Iteration, etc.. ###
+
+<img width="1163" alt="Screen Shot 2021-05-02 at 16 34 04" src="https://user-images.githubusercontent.com/16725496/116826866-3c333400-ab64-11eb-9c99-e87742d273f7.png">
+
+<img width="1148" alt="Screen Shot 2021-05-02 at 16 32 13" src="https://user-images.githubusercontent.com/16725496/116826821-ff673d00-ab63-11eb-969c-72c0d0711076.png">
 
 
 
