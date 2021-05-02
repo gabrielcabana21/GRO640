@@ -51,7 +51,7 @@ For "memoryless" controller, this operation is
 
 ## How to use ##
 
-See exemples scripts in pyro/exemples.
+See exemples scripts in pyro/examples.
 
 Coming soon..
 
