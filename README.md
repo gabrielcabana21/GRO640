@@ -59,17 +59,22 @@ See exemples scripts in pyro/examples.
 
 Coming soon..
 
-## Gallery ##
+## Gallery of exemples ##
 
-### Double-pendulum Swing-up solved with Computed-Torque, RRT, Value-Iteration, etc.. ###
 
-<img width="1154" alt="Screen Shot 2021-05-02 at 16 26 47" src="https://user-images.githubusercontent.com/16725496/116826831-0ee68600-ab64-11eb-8c2f-ef38900d140e.png">
+### Pendulums Swing-up solved with Computed-Torque, RRT, Value-Iteration, etc.. ###
+
+<img width="1163" alt="Screen Shot 2021-05-02 at 16 34 04" src="https://user-images.githubusercontent.com/16725496/116826866-3c333400-ab64-11eb-9c99-e87742d273f7.png">
 
 <img width="1148" alt="Screen Shot 2021-05-02 at 16 32 13" src="https://user-images.githubusercontent.com/16725496/116826821-ff673d00-ab63-11eb-969c-72c0d0711076.png">
 
 
-
 ### Car parallel parking solved with RRT, Value-Iteration, etc.. ###
+
+<img width="1163" alt="Screen Shot 2021-05-02 at 16 34 04" src="https://user-images.githubusercontent.com/16725496/116826923-8ae0ce00-ab64-11eb-9fb8-a79b19b24a3d.png">
+
+<img width="881" alt="Screen Shot 2021-05-02 at 16 35 29" src="https://user-images.githubusercontent.com/16725496/116826928-8e745500-ab64-11eb-9a75-9375dfd1614b.png">
+
 
 
 ### Redondant Manipulator Controller ###
