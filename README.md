@@ -22,7 +22,7 @@ git clone https://github.com/SherbyRobotics/pyro.git
 ```
 then add the pyro folder to the pythonpath variable of your environment. In spyder this option is found in the menu at python/PYTHONPATH manager.
 
-## Librarie Architecture ##
+## Library Architecture ##
 
 ### Dynamic objects ###
 
@@ -51,7 +51,11 @@ For "memoryless" controller, this operation is
 
 ## How to use ##
 
+See exemples scripts in pyro/exemples.
+
 Coming soon..
+
+
 
 
 
