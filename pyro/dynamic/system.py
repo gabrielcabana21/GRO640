@@ -141,7 +141,7 @@ class ContinuousDynamicSystem:
         t  : time                     1 x 1
         
         OUTPUTS
-        y  : output derivative vector p x 1
+        y  : output vector            p x 1
         
         """
         
