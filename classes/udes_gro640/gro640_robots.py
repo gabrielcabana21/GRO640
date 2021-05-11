@@ -561,6 +561,8 @@ class DrillingRobotOnJig( DrillingRobot ):
         return f_ext
     
     
+    
+    
     ###########################################################################
     def forward_kinematic_lines(self, q ):
         
