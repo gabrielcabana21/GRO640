@@ -402,8 +402,8 @@ class OneLinkManipulator( Manipulator ):
     def setparams(self):
         """ Set model parameters here """
         
-        self.l1  = 0.5
-        self.lc1 = 0.2
+        self.l1  = 2.5
+        self.lc1 = 1.2
         
         self.m1 = 1
         self.I1 = 0
@@ -550,7 +550,7 @@ class OneLinkManipulator( Manipulator ):
     def forward_kinematic_domain(self, q ):
         """ 
         """
-        l = 1
+        l = self.l1 * 1.2
         
         domain  = [ (-l,l) , (-l,l) , (-l,l) ]#  
                 
@@ -585,13 +585,55 @@ class OneLinkManipulator( Manipulator ):
         # pendulum kinematic
         ###########################
         
-        pts      = np.zeros(( 2 , 3 ))
-        pts[0,:] = np.array([0,0,0])
+        pts      = np.zeros(( 6 , 3 ))
         
         [c1,s1] = self.trig( q )
         
-        pts[1,0] = self.l1 * s1
-        pts[1,1] = self.l1 * c1
+        l = self.l1 * 0.9
+        h = self.l1 * 0.1
+        
+        pts[1,0] = 0 * s1 + h * c1
+        pts[1,1] = 0 * c1 - h * s1
+        
+        pts[2,0] = l * s1 + h * c1
+        pts[2,1] = l * c1 - h * s1
+        
+        pts[3,0] = l * s1 - h * c1
+        pts[3,1] = l * c1 + h * s1
+        
+        pts[4,0] = 0 * s1 - h * c1
+        pts[4,1] = 0 * c1 + h * s1
+        
+        lines_pts.append( pts )
+        
+        
+        ###########################
+        # end effector
+        ###########################
+        
+        pts      = np.zeros(( 7 , 3 ))
+        
+        pts[0,0] = l * s1 + 0 * c1
+        pts[0,1] = l * c1 - 0 * s1
+        
+        pts[1,0] = (l+h) * s1 + 0 * c1
+        pts[1,1] = (l+h) * c1 - 0 * s1
+        
+        pts[2,0] = (l+h) * s1 - h * c1
+        pts[2,1] = (l+h) * c1 + h * s1
+        
+        pts[3,0] = (l+h+h) * s1 - h * c1
+        pts[3,1] = (l+h+h) * c1 + h * s1
+        
+        pts[4,0] = (l+h) * s1 - h * c1
+        pts[4,1] = (l+h) * c1 + h * s1
+        
+        pts[5,0] = (l+h) * s1 + h * c1
+        pts[5,1] = (l+h) * c1 - h * s1
+        
+        pts[6,0] = (l+h+h) * s1 + h * c1
+        pts[6,1] = (l+h+h) * c1 - h * s1
+        
         
         lines_pts.append( pts )
                 
@@ -1674,11 +1716,11 @@ if __name__ == "__main__":
     #sys = TwoLinkManipulator()
     
     sys.x0[0] = 0.1
-    #sys.animate_simulation()
+    sys.animate_simulation()
     #sys.plot_trajectory()
     
-    sys = ThreeLinkManipulator3D()
-    sys.x0[0] = 0.1
+    #sys = ThreeLinkManipulator3D()
+    #sys.x0[0] = 0.1
     #sys.animate_simulation( is_3d = True )
     #sys.plot_trajectory()
     
@@ -1686,7 +1728,7 @@ if __name__ == "__main__":
     #sys.ubar = np.array([1,1,1,1,1])
     #sys.animate_simulation()
     
-    aaa = TwoLinkManipulatorwithObstacles()
-    bbb = SpeedControlledManipulator.from_manipulator( aaa )
-    bbb.ubar = np.array([1,1])
-    bbb.animate_simulation()
+    #aaa = TwoLinkManipulatorwithObstacles()
+    #bbb = SpeedControlledManipulator.from_manipulator( aaa )
+    #bbb.ubar = np.array([1,1])
+    #bbb.animate_simulation()
