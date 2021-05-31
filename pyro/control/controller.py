@@ -73,7 +73,7 @@ class StaticController():
         r  : reference signal vector       k x 1
         t  : time                          1 x 1
         
-        OUPUTS
+        OUTPUTS
         u  : control inputs vector         m x 1
         
         """
@@ -124,7 +124,7 @@ class StaticController():
         y  : sensor signal vector     p x 1
         t  : time                     1 x 1
         
-        OUPUTS
+        OUTPUTS
         u  : control inputs vector    m x 1
         
         """
@@ -230,7 +230,7 @@ class ClosedLoopSystem( system.ContinuousDynamicSystem ):
         u  : control inputs vector    m x 1
         t  : time                     1 x 1
         
-        OUPUTS
+        OUTPUTS
         dx : state derivative vector  n x 1
         
         """
@@ -390,6 +390,7 @@ class ClosedLoopSystem( system.ContinuousDynamicSystem ):
 
 
 
+
 ###############################################################################
 class DynamicController( StaticController ):
     """
@@ -407,10 +408,10 @@ class DynamicController( StaticController ):
     -----------------------------------------
     
     Control law
-    u  = c( z, y, r , t )
+    u  = c( z, y, r, t)
     
     Internal dynamic
-    dz / dt  = b( z, y , r, t )
+    dz / dt  = b( z, y, r, t)
     
     """
     
@@ -471,7 +472,7 @@ class DynamicController( StaticController ):
         r  : reference signal vector       k x 1
         t  : time                          1 x 1
         
-        OUPUTS
+        OUTPUTS
         u  : control inputs vector         m x 1
         
         """
@@ -493,7 +494,7 @@ class DynamicController( StaticController ):
         r  : reference signal vector       k x 1
         t  : time                          1 x 1
         
-        OUPUTS
+        OUTPUTS
         d z / dt  : time derivative of internal states        l x 1
         """
         
@@ -512,7 +513,7 @@ class DynamicController( StaticController ):
         y  : sensor signal vector     p x 1
         t  : time                     1 x 1
         
-        OUPUTS
+        OUTPUTS
         u  : control inputs vector    m x 1
         
         """
@@ -550,6 +551,13 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
             raise ValueError("Controller inputs do not match system outputs")
         if plant.m != controller.m:
             raise ValueError("Controller outputs do not match system inputs")
+            
+            
+        ########################
+        #Remove cost funtion
+        ########################
+        
+        plant.cost_function = None
         
         ClosedLoopSystem.__init__( self, plant, controller)
 
@@ -598,7 +606,7 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
         u  : control inputs vector    m x 1
         t  : time                     1 x 1
         
-        OUPUTS
+        OUTPUTS
         dx : state derivative vector  n x 1
         
         """
@@ -638,7 +646,7 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
         x  : state vector             plant.n x 1
         t  : time                     1 x 1
         
-        OUPUTS
+        OUTPUTS
         dx : state derivative vector  n x 1
         
         """

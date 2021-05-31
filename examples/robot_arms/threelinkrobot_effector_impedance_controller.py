@@ -8,16 +8,18 @@ Created on Sun May 12 16:34:44 2019
 ###############################################################################
 import numpy as np
 ###############################################################################
-from pyro.control  import robotcontrollers
 from pyro.dynamic  import manipulator
+from pyro.control  import robotcontrollers
 ###############################################################################
 
-torque_controlled_robot      = manipulator.TwoLinkManipulator()
+
+# Model
+torque_controlled_robot   = manipulator.ThreeLinkManipulator3D()
+
 
 # Target
-q_desired = np.array([0.5,0.5])
+q_desired = np.array([0,0,0])
 r_desired = torque_controlled_robot.forward_kinematic_effector( q_desired )
-
 
 # Effector PD 
 
@@ -25,17 +27,15 @@ model = torque_controlled_robot
 
 effector_pd      = robotcontrollers.EndEffectorPD( model )
 effector_pd.rbar = r_desired
-effector_pd.kp   = np.array([100, 100 ])
-effector_pd.kd   = np.array([  0,   0 ])
+effector_pd.kp   = np.array([100, 100 , 100])
+effector_pd.kd   = np.array([ 10,  10 ,  10])
 
 # Closed-loops
-
 robot_with_effector_pd = effector_pd + torque_controlled_robot 
 
-# Simulations
-
-tf = 4
-robot_with_effector_pd.x0 = np.array([0,0,0,0])
-robot_with_effector_pd.compute_trajectory( tf )
-robot_with_effector_pd.plot_trajectory('xu')
-robot_with_effector_pd.animate_simulation()
+# Simulation
+robot_with_effector_pd.x0  = np.array([3.14,-3,2,0,0,0])
+robot_with_effector_pd.compute_trajectory()
+robot_with_effector_pd.plot_trajectory('x')
+robot_with_effector_pd.plot_trajectory('u')
+robot_with_effector_pd.animate_simulation(time_factor_video=1, is_3d=True)

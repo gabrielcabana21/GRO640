@@ -18,36 +18,36 @@ torque_controlled_robot      = manipulator.TwoLinkManipulator()
 q_desired = np.array([0.5,0.5])
 r_desired = torque_controlled_robot.forward_kinematic_effector( q_desired )
 
-# Joint PID
+# Joint PD
 
 dof = 2
 
-joint_pid      = robotcontrollers.JointPID( dof )
-joint_pid.rbar = q_desired
-joint_pid.kp   = np.array([25, 5 ])
-joint_pid.kd   = np.array([ 1, 0 ])
+joint_PD      = robotcontrollers.JointPD( dof )
+joint_PD.rbar = q_desired
+joint_PD.kp   = np.array([25, 5 ])
+joint_PD.kd   = np.array([ 1, 0 ])
 
 
-# Effector PID 
+# Effector PD 
 
 model = torque_controlled_robot
 
-effector_pid      = robotcontrollers.EndEffectorPID( model )
-effector_pid.rbar = r_desired
-effector_pid.kp   = np.array([100, 100 ])
-effector_pid.kd   = np.array([  0,   0 ])
+effector_PD      = robotcontrollers.EndEffectorPD( model )
+effector_PD.rbar = r_desired
+effector_PD.kp   = np.array([100, 100 ])
+effector_PD.kd   = np.array([  0,   0 ])
 
 # Closed-loops
 
-robot_with_joint_pid    = joint_pid    + torque_controlled_robot 
-robot_with_effector_pid = effector_pid + torque_controlled_robot 
+robot_with_joint_PD    = joint_PD    + torque_controlled_robot 
+robot_with_effector_PD = effector_PD + torque_controlled_robot 
 
 # Simulations
 
 x0 = np.array([0,0,0,0])
 tf = 5
 
-for robot in (robot_with_joint_pid, robot_with_effector_pid):
+for robot in (robot_with_joint_PD, robot_with_effector_PD):
     robot.x0 = x0
     robot.compute_trajectory(tf)
     robot.animate_simulation()
