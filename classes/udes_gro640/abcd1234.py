@@ -14,7 +14,7 @@ Fichier d'amorce pour les livrables de la problématique GRO640'
 
 import numpy as np
 
-from pyro.control.robotcontrollers import EndEffectorPID
+from pyro.control.robotcontrollers import EndEffectorPD
 from pyro.control.robotcontrollers import EndEffectorKinematicController
 
 
@@ -165,7 +165,7 @@ class CustomPositionController( EndEffectorKinematicController ) :
         
 
         
-class CustomDrillingController( EndEffectorPID ) :
+class CustomDrillingController( EndEffectorPD ) :
     """ 
 
     """
@@ -174,7 +174,7 @@ class CustomDrillingController( EndEffectorPID ) :
     def __init__(self, robot_model ):
         """ """
         
-        EndEffectorPID.__init__( self , robot_model )
+        EndEffectorPD.__init__( self , robot_model )
         
         # Label
         self.name = 'Custom Drilling Controller'
