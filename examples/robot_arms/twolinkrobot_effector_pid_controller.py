@@ -14,8 +14,6 @@ from pyro.dynamic  import manipulator
 
 torque_controlled_robot      = manipulator.TwoLinkManipulator()
 
-torque_controlled_robot.cost_function = None
-
 # Target
 q_desired = np.array([0.5,0.5])
 r_desired = torque_controlled_robot.forward_kinematic_effector( q_desired )
@@ -24,7 +22,7 @@ r_desired = torque_controlled_robot.forward_kinematic_effector( q_desired )
 
 dof = 2
 
-effector_pid      = robotcontrollers.EffectorPID( torque_controlled_robot )
+effector_pid      = robotcontrollers.EndEffectorPID( torque_controlled_robot )
 effector_pid.rbar = r_desired
 effector_pid.kp   = np.array([100, 100 ])
 effector_pid.kd   = np.array([  0,   0 ])

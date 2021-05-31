@@ -14,8 +14,6 @@ from pyro.dynamic  import manipulator
 
 torque_controlled_robot      = manipulator.TwoLinkManipulator()
 
-torque_controlled_robot.cost_function = None
-
 # Target
 q_desired = np.array([0.5,0.5])
 

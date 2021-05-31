@@ -551,6 +551,13 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
             raise ValueError("Controller inputs do not match system outputs")
         if plant.m != controller.m:
             raise ValueError("Controller outputs do not match system inputs")
+            
+            
+        ########################
+        #Remove cost funtion
+        ########################
+        
+        plant.cost_function = None
         
         ClosedLoopSystem.__init__( self, plant, controller)
 

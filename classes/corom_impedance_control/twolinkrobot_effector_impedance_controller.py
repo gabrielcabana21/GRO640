@@ -19,22 +19,22 @@ q_desired = np.array([0.5,0.5])
 r_desired = torque_controlled_robot.forward_kinematic_effector( q_desired )
 
 
-# Effector PID 
+# Effector pd 
 
 model = torque_controlled_robot
 
-effector_pid      = robotcontrollers.EndEffectorPID( model )
-effector_pid.rbar = r_desired
-effector_pid.kp   = np.array([100, 100 ])
-effector_pid.kd   = np.array([  0,   0 ])
+effector_pd      = robotcontrollers.EndEffectorPD( model )
+effector_pd.rbar = r_desired
+effector_pd.kp   = np.array([100, 100 ])
+effector_pd.kd   = np.array([  0,   0 ])
 
 # Closed-loops
 
-robot_with_effector_pid = effector_pid + torque_controlled_robot 
+robot_with_effector_pd = effector_pd + torque_controlled_robot 
 
 # Simulations
 tf = 4
-robot_with_effector_pid.x0 = np.array([0,0,0,0])
-robot_with_effector_pid.compute_trajectory( tf )
-robot_with_effector_pid.plot_trajectory('xu')
-robot_with_effector_pid.animate_simulation()
+robot_with_effector_pd.x0 = np.array([0,0,0,0])
+robot_with_effector_pd.compute_trajectory( tf )
+robot_with_effector_pd.plot_trajectory('xu')
+robot_with_effector_pd.animate_simulation()

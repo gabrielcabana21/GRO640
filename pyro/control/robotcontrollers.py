@@ -509,7 +509,7 @@ class JointPID( controller.DynamicController ) :
 # End-Effector PID
 ###############################################################################
         
-class EffectorPID( controller.DynamicController ) :
+class EndEffectorPID( controller.DynamicController ) :
     """ 
     Linear controller for mechanical system with full state feedback (y=x)
     Independent PID for each DOF
