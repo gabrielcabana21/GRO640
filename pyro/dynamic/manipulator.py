@@ -7,6 +7,7 @@ Created on Wed May  8 08:47:05 2019
 
 ###############################################################################
 import numpy as np
+import matplotlib.pyplot as plt
 ###############################################################################
 from pyro.dynamic import system
 from pyro.dynamic import mechanical
@@ -72,6 +73,13 @@ class Manipulator( mechanical.MechanicalSystem ):
         
         # Name
         self.name = str(dof) + 'Joint Manipulator Robot'
+        
+        # Default Label and units
+        self.effector_label = []
+        self.effector_units = []
+        for i in range(e):
+            self.effector_label.append('Axis '+str(i))
+            self.effector_units.append('[m]')
         
     ###########################################################################
     # The following functions needs to be overloaded by child classes
@@ -219,11 +227,54 @@ class Manipulator( mechanical.MechanicalSystem ):
         # If no argument is passed, use object traj
         if traj == None:
             traj = self.traj
-            
         
-            
+        # Plot param
+        fontsize = 5
+        figsize  = (4, 3)
+        dpi      = 300
         
+        #Number of plot
+        l = self.e * 1
+        
+        simfig , plots = plt.subplots( l, sharex=True, figsize=figsize,
+                                      dpi=dpi, frameon=True)
             
+        simfig.canvas.set_window_title('End-Effector trajectory for ' + 
+                                       self.name)
+        
+        
+        # Computing end-effector trajectory
+        n  = traj.time_steps
+        
+        r_traj  = np.zeros((n,self.e))
+        dr_traj = np.zeros((n,self.e))
+        
+        for i in range(traj.time_steps):
+            
+            x = traj.x[i, :]
+            
+            q, dq = self.x2q(x)
+            
+            r  = self.forward_kinematic_effector( q )
+            dr = self.forward_differential_kinematic_effector(q, dq)
+            
+            r_traj[i,:]  =  r
+            dr_traj[i,:] = dr
+        
+        #j = 0 # plot index
+        for i in range( l ):
+                plots[i].plot( traj.t , r_traj[:,i] , 'b')
+                plots[i].set_ylabel(self.effector_label[i] +'\n'+
+                self.effector_units[i] , fontsize = fontsize )
+                plots[i].grid(True)
+                plots[i].tick_params( labelsize = fontsize )
+        
+        plots[l-1].set_xlabel('Time [sec]', fontsize=fontsize )
+        
+        simfig.tight_layout()
+        simfig.canvas.draw()
+        plt.show()
+                
         return 
         
 
@@ -1729,7 +1780,9 @@ if __name__ == "__main__":
     
     sys.x0[0] = 0.1
     sys.animate_simulation()
-    #sys.plot_trajectory()
+    sys.plot_trajectory()
+    sys.plot_end_effector_trajectory()
+    
     
     #sys = ThreeLinkManipulator3D()
     #sys.x0[0] = 0.1
