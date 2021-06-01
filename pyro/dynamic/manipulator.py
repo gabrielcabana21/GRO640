@@ -206,6 +206,25 @@ class Manipulator( mechanical.MechanicalSystem ):
                                               - g 
                                               - d ) )
         return ddq
+    
+    
+    ##############################
+    def plot_end_effector_trajectory(self, traj = None ):
+        """ 
+        Plot the end effector trajectory with respect to time
+        --------------------------------------------------------------
+        
+        """  
+        
+        # If no argument is passed, use object traj
+        if traj == None:
+            traj = self.traj
+            
+        
+            
+        
+            
+        return 
         
 
 
@@ -394,23 +413,16 @@ class OneLinkManipulator( Manipulator ):
         # Name
         self.name = 'One Link Manipulator'
         
-        # params
-        self.setparams()
+        # Plot param
+        self.linestyle = '-'
                 
-            
-    #############################
-    def setparams(self):
-        """ Set model parameters here """
-        
-        self.l1  = 2.5
-        self.lc1 = 1.2
-        
-        self.m1 = 1
-        self.I1 = 0
-        
-        self.gravity = 9.81
-        
-        self.d1 = 0.1
+        # Model parameters
+        self.l1      = 2.5  # Link length
+        self.lc1     = 1.2  # Center of mass distance from pivot
+        self.m1      = 1    # Mass
+        self.I1      = 0    # Inertia
+        self.gravity = 9.81 # Gravity field constant
+        self.d1      = 0.1  # Linear damping coef
         
         
     ##############################

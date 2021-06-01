@@ -189,7 +189,8 @@ class SinglePendulum( mechanical.MechanicalSystem ):
         
         [c1,s1] = self.trig( q )
         
-        pts[1,:] = np.array([ s1 * self.l1 , - c1 * self.l1 ,0])
+        pts[1,0] =   s1 * self.l1
+        pts[1,1] = - c1 * self.l1
         
         lines_pts.append( pts )
                 

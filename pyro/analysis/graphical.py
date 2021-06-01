@@ -43,6 +43,7 @@ class TrajectoryPlotter:
         plot = 'u'
         plot = 'y'
         plot = 'j'
+        plot = 'z'
         """
 
         if 'j' in plot and (traj.J is None or traj.dJ is None):
@@ -75,10 +76,8 @@ class TrajectoryPlotter:
             l = sys.p
         elif plot == 'j':
             l = 2
-        elif plot == 'z5':
-            l = 5
-        elif plot == 'z8':
-            l = 8
+        elif plot == 'z':
+            l = sys.controller.l
         else:
             raise ValueError('not a valid ploting argument')
 
@@ -138,22 +137,13 @@ class TrajectoryPlotter:
             plots[j].tick_params( labelsize = self.fontsize )
             j = j + 1
             
-        if plot == 'z5':
+        if plot == 'z':
             # Internal states
+            n = sys.n - sys.controller.l
             for i in range( l ):
-                plots[j].plot( traj.t , traj.x[:,i+sys.p] , 'b')
-                plots[j].set_ylabel(sys.state_label[i+sys.p] +'\n'+
-                sys.state_units[i+sys.p] , fontsize=self.fontsize )
-                plots[j].grid(True)
-                plots[j].tick_params( labelsize = self.fontsize )
-                j = j + 1
-
-        if plot == 'z8':
-            # Internal states
-            for i in range( l ):
-                plots[j].plot( traj.t , traj.x[:,i+sys.p] , 'b')
-                plots[j].set_ylabel(sys.state_label[i+sys.p] +'\n'+
-                sys.state_units[i+sys.p] , fontsize=self.fontsize )
+                plots[j].plot( traj.t , traj.x[:,i+n] , 'b')
+                plots[j].set_ylabel(sys.state_label[i+n] +'\n'+
+                sys.state_units[i+n] , fontsize=self.fontsize )
                 plots[j].grid(True)
                 plots[j].tick_params( labelsize = self.fontsize )
                 j = j + 1
@@ -297,7 +287,7 @@ class Animator:
         # Params
         self.figsize   = (4, 3)
         self.dpi       = 300
-        self.linestyle = 'o-'
+        self.linestyle = sys.linestyle 
         self.fontsize  = 5
         
 

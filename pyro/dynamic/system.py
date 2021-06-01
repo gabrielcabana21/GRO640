@@ -86,6 +86,10 @@ class ContinuousDynamicSystem:
         self.xbar = np.zeros(self.n)
         self.ubar = np.zeros(self.m)
         
+        # Plot params
+        self.domain     = [ (-10,10) , (-10,10) , (-10,10) ]
+        self.linestyle  = 'o-'
+        
         ################################
         # Variables
         ################################
@@ -215,11 +219,7 @@ class ContinuousDynamicSystem:
     def forward_kinematic_domain(self, q ):
         """ Set the domain range for ploting, can be static or dynamic """
         
-        l = 10
-        
-        domain  = [ (-l,l) , (-l,l) , (-l,l) ]  
-                
-        return domain
+        return self.domain
     
     
     ###########################################################################

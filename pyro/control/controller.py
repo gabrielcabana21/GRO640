@@ -748,7 +748,7 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
         plotter.plot( self.traj, plot, **kwargs)
         
     #############################
-    def plot_internal_states_5(self, plot='z5', **kwargs):
+    def plot_internal_controller_states(self, plot='z', **kwargs):
         """
         Plot time evolution of a simulation of this system
         ------------------------------------------------
@@ -762,22 +762,8 @@ class DynamicClosedLoopSystem( ClosedLoopSystem ):
                
         plotter = graphical.TrajectoryPlotter( self )
         plotter.plot( self.traj, plot, **kwargs)
-        
-    #############################
-    def plot_internal_states_8(self, plot='z8', **kwargs):
-        """
-        Plot time evolution of a simulation of this system
-        ------------------------------------------------
-        note: will call compute_trajectory if no simulation data is present
 
-        """
-        
-        # Check if trajectory is already computed
-        if self.traj == None:
-            self.compute_trajectory()
-               
-        plotter = graphical.TrajectoryPlotter( self )
-        plotter.plot( self.traj, plot, **kwargs)  
+
     
     ###########################################################################
     def plot_phase_plane_closed_loop( self , x_axis = 0 , y_axis = 1 ):
