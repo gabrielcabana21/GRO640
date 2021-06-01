@@ -387,6 +387,14 @@ class ClosedLoopSystem( system.ContinuousDynamicSystem ):
         
         plotter = self.get_plotter()
         plotter.phase_plane_trajectory_closed_loop( self.traj, x_axis, y_axis)
+        
+        
+    ###########################################################################
+    def plot_end_effector_trajectory(self, traj = None ):
+        
+        self.plant.plot_end_effector_trajectory( self.traj )
+        
+        
 
 
 
