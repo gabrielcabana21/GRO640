@@ -431,6 +431,22 @@ class ContinuousDynamicSystem:
             self.compute_trajectory()
 
         self.get_animator().animate_simulation( self.traj, **kwargs)
+        
+        
+    #############################
+    def bode(self, u_index, y_index):
+        """
+        Bode plot of linearized siso
+
+        """
+        
+        from pyro.dynamic.statespace import linearize
+        from pyro.dynamic.tranferfunction import ss2tf
+        
+        linearized_sys = linearize( self )
+        siso_sys       = ss2tf( linearized_sys, u_index, y_index)
+        siso_sys.bode_plot()
+
 
 
 '''

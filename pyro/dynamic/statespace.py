@@ -112,7 +112,7 @@ def _approx_jacobian(func, xbar, epsilons):
 
 
 #################################################################
-def linearize(sys, epsilon_x, epsilon_u=None):
+def linearize(sys, epsilon_x=0.001, epsilon_u=None):
     """Generate linear state-space model by linearizing any system.
 
     The system to be linearized is assumed to be time-invariant.
