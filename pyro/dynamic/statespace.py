@@ -91,7 +91,6 @@ def _approx_jacobian(func, xbar, epsilons):
     m  = ybar.shape[0]
 
     J = np.zeros((m, n))
-    J[0,0] = 45.2
     
     for i in range(n):
         # Forward evaluation
@@ -168,9 +167,25 @@ def linearize(sys, epsilon_x, epsilon_u=None):
     B = _approx_jacobian(f_u, ubar, epsilon_u)
     C = _approx_jacobian(h_x, xbar, epsilon_x)
     D = _approx_jacobian(h_u, ubar, epsilon_u)
+    
+    ss = StateSpaceSystem(A, B, C, D)
+    
+    for i in range(sys.n):
+        ss.state_label[i]  = 'Delta ' + sys.state_label[i]
+    
+    ss.state_units  = sys.state_units
+    
+    for i in range(sys.p):
+        ss.output_label[i] = 'Delta ' + sys.output_label[i]
+        
+    ss.output_units = sys.output_units
+    
+    for i in range(sys.m):
+        ss.input_label[i]  = 'Delta ' + sys.input_label[i]
+        
+    ss.input_units  = sys.input_units
 
-    return StateSpaceSystem(A, B, C, D)
-
+    return ss
 
 '''
 #################################################################
