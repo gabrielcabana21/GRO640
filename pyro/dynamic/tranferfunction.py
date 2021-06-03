@@ -103,6 +103,24 @@ class TransferFunction( ContinuousDynamicSystem ):
         
         plt.show()
         
+    ############################################
+    def pz_map(self):
+        """ Plot poles and zeros """
+        
+        self.compute_poleszeros()
+        
+        fig , plot = plt.subplots(1, sharex=True, figsize=self.figsize, 
+                                  dpi=self.dpi, frameon=True)
+        
+        plot.plot( self.poles.real, self.poles.imag, 'x')
+        plot.plot( self.zeros.real, self.zeros.imag, 'o')
+        plot.grid(True)
+        plot.tick_params( labelsize = self.fontsize )
+        
+        fig.canvas.set_window_title('Poles and zeros of ' + self.name)
+        
+        plt.show()
+        
 
 
 
