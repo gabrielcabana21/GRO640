@@ -434,7 +434,7 @@ class ContinuousDynamicSystem:
         
         
     #############################
-    def bode(self, u_index, y_index):
+    def bode(self, u_index=0, y_index=0):
         """
         Bode plot of linearized siso
 
