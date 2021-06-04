@@ -184,6 +184,8 @@ def linearize(sys, epsilon_x=0.001, epsilon_u=None):
         ss.input_label[i]  = 'Delta ' + sys.input_label[i]
         
     ss.input_units  = sys.input_units
+    
+    ss.name = 'Linearized ' + sys.name
 
     return ss
 

@@ -56,7 +56,7 @@ class PhasePlot:
         self.streamplot = False
         self.arrowstyle = '->'
         self.headlength = 4.5
-        self.fontsize   = 6
+        self.fontsize   = 5
         
         
     ###########################################################################
@@ -133,6 +133,7 @@ class PhasePlot:
         
         self.ax.set_xlim([ self.x_axis_min , self.x_axis_max ])
         self.ax.set_ylim([ self.y_axis_min , self.y_axis_max ])
+        self.ax.tick_params( labelsize = self.fontsize )
         self.ax.grid(True)
         self.phasefig.tight_layout()
         

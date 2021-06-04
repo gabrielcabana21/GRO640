@@ -434,7 +434,7 @@ class ContinuousDynamicSystem:
         
         
     #############################
-    def bode(self, u_index=0, y_index=0):
+    def plot_linearized_bode(self, u_index=0, y_index=0):
         """
         Bode plot of linearized siso
 
@@ -446,6 +446,21 @@ class ContinuousDynamicSystem:
         linearized_sys = linearize( self )
         siso_sys       = ss2tf( linearized_sys, u_index, y_index)
         siso_sys.bode_plot()
+        
+    
+    #############################
+    def plot_linearized_pz_map(self, u_index=0, y_index=0):
+        """
+        Bode plot of linearized siso
+
+        """
+        
+        from pyro.dynamic.statespace import linearize
+        from pyro.dynamic.tranferfunction import ss2tf
+        
+        linearized_sys = linearize( self )
+        siso_sys       = ss2tf( linearized_sys, u_index, y_index)
+        siso_sys.pz_map()
 
 
 

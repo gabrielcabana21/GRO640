@@ -140,7 +140,7 @@ class PIDController( controller.DynamicController ):
     """
     
     ##########################################################
-    def __init__(self, KP, KI=None, KD=None, tau=3E-3 , sat = 10):
+    def __init__(self, KP, KI=None, KD=None, tau=3E-3 , sat = None):
         
         self.KP = to_2D_arr(KP)
 
@@ -160,7 +160,7 @@ class PIDController( controller.DynamicController ):
 
         self.tau = tau
         self.sat = sat # saturation
-        self.name = "PID Controller"
+        
         
         k = self.KP.shape[1]
         l = self.KP.shape[1]*2
@@ -173,6 +173,7 @@ class PIDController( controller.DynamicController ):
             self.internal_state_label[i] = 'Integral of output ' + str(i)
             self.internal_state_label[i+self.p] = ('Filter state of output ' 
                                                    + str(i) )
+        self.name = "PID Controller"
         
         
     #################################

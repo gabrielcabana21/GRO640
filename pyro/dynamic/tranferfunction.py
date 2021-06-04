@@ -135,6 +135,9 @@ def ss2tf( ss, u_index , y_index):
     num = nums[y_index]
     
     tf = TransferFunction(num, den)
+    
+    tf.name = (ss.output_label[y_index] + '/' + ss.input_label[u_index] + 
+               ' transfer function of ' + ss.name )
 
     tf.output_label[0] = ss.output_label[y_index]
     tf.output_units[0] = ss.output_units[y_index]
