@@ -8,9 +8,12 @@ Created on Fri May  1 19:51:49 2020
 import numpy as np
 import matplotlib
 
+import sys
+sys.path.append("classes/udes_gro640/")
+
 from gro640_robots import DrillingRobot
 from gro640_robots import DrillingRobotOnJig
-from abcd1234      import CustomDrillingController
+from cabg2101      import CustomDrillingController
 
 
 # Model dynamique du robot

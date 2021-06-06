@@ -17,17 +17,9 @@ output/
 
 # OS Files #
 .DS_Store
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/pyro.iml
-.idea/vcs.xml
-.pytest_cache/v/cache/lastfailed
-.pytest_cache/v/cache/nodeids
-.idea/other.xml
+.idea/
 *.html
 *.png
-.idea/workspace.xml
 build/
 traj_optim_run1_results_0011.npy
 traj_optim_run1_results_0010.npy

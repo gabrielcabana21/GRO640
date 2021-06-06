@@ -7,16 +7,18 @@ Created on Fri May  1 19:51:49 2020
 """
 import numpy as np
 
-from gro640_robots import LaserRobot
+import sys
+sys.path.append("classes/udes_gro640/")
 
-from abcd1234      import CustomPositionController  # Empty template
+from gro640_robots import LaserRobot
+from cabg2101 import CustomPositionController
 
 
 # Model cinématique du robot
 sys = LaserRobot()
 
 # Contrôleur en position de l'effecteur standard
-ctl = CustomPositionController( sys )
+ctl = CustomPositionController(sys)
 
 # Cible de position pour l'effecteur
 ctl.rbar = np.array([0,-1])
