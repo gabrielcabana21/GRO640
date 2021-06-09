@@ -86,7 +86,12 @@ class StateSpaceSystem(ContinuousDynamicSystem):
         i : mode index
         """
         
-        tf = 1. / np.sqrt(self.poles[i].real**2 + self.poles[i].imag**2)  * 2 * np.pi + 1
+        #Time scaling for the mode
+        norm = np.sqrt(self.poles[i].real**2 + self.poles[i].imag**2)
+        if norm<0.0001:
+            tf = 10
+        else:
+            tf = max( 1. / norm * 2 * np.pi + 1,100)
         n  = 2001
 
         sim = simulation.Simulator(self, tf, n)
@@ -118,7 +123,7 @@ class StateSpaceSystem(ContinuousDynamicSystem):
         label    = template % (i, self.poles[i].real, self.poles[i].imag)
         
         animator.top_right_label = label
-        animator.animate_simulation( traj )
+        animator.animate_simulation( traj, 3.0)
 
     
     
