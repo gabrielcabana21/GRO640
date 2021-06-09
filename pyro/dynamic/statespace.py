@@ -1,6 +1,9 @@
 import numpy as np
 
-from pyro.dynamic import ContinuousDynamicSystem
+from scipy import linalg
+
+from pyro.dynamic  import ContinuousDynamicSystem
+from pyro.analysis import simulation
 
 
 ###############################################################################
@@ -63,6 +66,62 @@ class StateSpaceSystem(ContinuousDynamicSystem):
         y = np.dot(self.C, x) + np.dot(self.D, u)
         
         return y
+    
+    
+    ############################################
+    def compute_eigen_modes(self):
+        
+        D,V = linalg.eig( self.A )
+        
+        self.poles = D
+        self.modes = V
+        
+        return (D,V)
+    
+    ############################################
+    def compute_eigen_mode_traj(self, i = 0 ):
+        """ 
+        Simulation of time evolution of the system on mode i
+        ------------------------------------------------
+        i : mode index
+        """
+        
+        tf = 1. / np.sqrt(self.poles[i].real**2 + self.poles[i].imag**2)  * 2 * np.pi + 1
+        n  = 2001
+
+        sim = simulation.Simulator(self, tf, n)
+        
+        sim.x0 = self.modes[:,i].real + self.xbar
+
+        traj   = sim.compute() # save the result in the instance
+
+        return traj
+    
+    ############################################
+    def animate_eigen_mode(self, i = 0 ):
+        """ 
+        Simulation of time evolution of the system on mode i
+        ------------------------------------------------
+        i : mode index
+        """
+        
+        # Compute eigen decomposition
+        self.compute_eigen_modes()
+        
+        # Simulate one mode
+        traj = self.compute_eigen_mode_traj( i )
+        
+        # Animate mode
+        animator       = self.get_animator()
+        
+        template = 'Mode %i \n%0.1f+%0.1fj'
+        label    = template % (i, self.poles[i].real, self.poles[i].imag)
+        
+        animator.top_right_label = label
+        animator.animate_simulation( traj )
+
+    
+    
     
     
 
@@ -170,6 +229,10 @@ def linearize(sys, epsilon_x=0.001, epsilon_u=None):
     
     ss = StateSpaceSystem(A, B, C, D)
     
+    #############
+    # Labels
+    #############
+    
     for i in range(sys.n):
         ss.state_label[i]  = 'Delta ' + sys.state_label[i]
     
@@ -186,6 +249,25 @@ def linearize(sys, epsilon_x=0.001, epsilon_u=None):
     ss.input_units  = sys.input_units
     
     ss.name = 'Linearized ' + sys.name
+    
+    #############
+    # Graphical
+    #############
+    
+    # New fonction from delta_states to configuration space
+    def new_xut2q( x, u, t):
+        
+        x = x + sys.xbar
+        u = u + sys.ubar
+        
+        return sys.xut2q( x, u, t)
+    
+    ss.xut2q                     = new_xut2q
+    
+    # Using the non-linear sys graphical kinematic
+    ss.linestyle                = sys.linestyle
+    ss.forward_kinematic_domain = sys.forward_kinematic_domain
+    ss.forward_kinematic_lines  = sys.forward_kinematic_lines
 
     return ss
 

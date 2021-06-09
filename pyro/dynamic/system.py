@@ -451,7 +451,6 @@ class ContinuousDynamicSystem:
     #############################
     def plot_linearized_pz_map(self, u_index=0, y_index=0):
         """
-        Bode plot of linearized siso
 
         """
         
@@ -461,6 +460,37 @@ class ContinuousDynamicSystem:
         linearized_sys = linearize( self )
         siso_sys       = ss2tf( linearized_sys, u_index, y_index)
         siso_sys.pz_map()
+        
+        
+    #############################
+    def animate_linearized_mode(self, i=0 ):
+        """
+
+        """
+        
+        from pyro.dynamic.statespace import linearize
+        
+        linearized_sys = linearize( self )
+        
+        linearized_sys.animate_eigen_mode( i )
+        
+        return linearized_sys
+    
+    #############################
+    def animate_linearized_modes(self ):
+        """
+        Linearize and show eigen modes
+
+        """
+        
+        from pyro.dynamic.statespace import linearize
+        
+        linearized_sys = linearize( self )
+        
+        for i in range(self.n):
+            linearized_sys.animate_eigen_mode( i )
+        
+        return linearized_sys
 
 
 

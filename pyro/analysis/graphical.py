@@ -290,6 +290,9 @@ class Animator:
         self.linestyle = sys.linestyle 
         self.fontsize  = 5
         
+        # Label
+        self.top_right_label = None
+        
 
     ###########################################################################
     def show(self, q , x_axis = 0 , y_axis = 1 ):
@@ -438,10 +441,14 @@ class Animator:
                 self.time_text = self.ani_ax.text(0.05, 0.9, 'time =', 
                                                   transform=self.
                                                   ani_ax.transAxes)
+                self.label_text = self.ani_ax.text(0.75, 0.8, self.top_right_label, 
+                                                   transform=self.
+                                                   ani_ax.transAxes)
                 self.ani_fig.tight_layout()
             self.lines.append( line )
         
         self.time_template = 'time = %.1fs'
+        
         
         # Animation
         inter      =  40.             # ms --> 25 frame per second
@@ -557,6 +564,7 @@ if __name__ == "__main__":
     sys.x0   = np.array([0,0,0])
     
     b = Animator(sys)
+    b.top_right_label = 'this is a label'
     sys.compute_trajectory( 100 )
     sys.plot_trajectory()
     b.animate_simulation( sys.traj, 10, is_3d)

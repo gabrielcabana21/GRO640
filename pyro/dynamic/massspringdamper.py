@@ -71,7 +71,7 @@ class SingleMass( statespace.StateSpaceSystem ):
     def xut2q( self, x , u , t ):
         """ Compute configuration variables ( q vector ) """
         
-        q = np.array([ x[0], u[0] ])
+        q = np.array([ x[0], u[0] ]) # Hack to illustrate force vector
 
         return q
     
